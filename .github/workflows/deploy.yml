@@ -1,3 +1,7 @@
+on:
+  push:
+    branches: [ $default-branch ]
+
 name: deploy-gh-pages
 jobs:
   build-deploy:
