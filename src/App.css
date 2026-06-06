@@ -171,6 +171,10 @@
   }
 }
 
+.winning {
+  color: green;
+}
+
 .ticks {
   position: relative;
   width: 100%;

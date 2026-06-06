@@ -86,10 +86,10 @@ function App() {
   return (
     <div className="wrapper">
       <section id="left">
-        <h2>Accessoires</h2>
+        <h2>Accessoires détective</h2>
         { accessories.map((a) => AccessorySelectable({ accessoire: a, onChange: onChange })) }
       </section>
-      {win && <PhraseDialog>{phrase}</PhraseDialog>}
+      {win && <PhraseDialog><div className='winning'>{phrase}</div></PhraseDialog>}
     </div>
   )
 }
