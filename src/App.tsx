@@ -4,28 +4,28 @@ import { AccessorySelectable } from './components/AccessorySelectable'
 import { PhraseDialog } from './components/PhraseDialog';
 
 
-function shuffle(arr: T[]) {
-  const newArr = [...arr];
-  // Source - https://stackoverflow.com/a/2450976
-// Posted by ChristopheD, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-06-06, License - CC BY-SA 4.0
+// function shuffle<T>(arr: T[]) {
+//   const newArr = [...arr];
+//   // Source - https://stackoverflow.com/a/2450976
+// // Posted by ChristopheD, modified by community. See post 'Timeline' for change history
+// // Retrieved 2026-06-06, License - CC BY-SA 4.0
 
-  let currentIndex = newArr.length;
+//   let currentIndex = newArr.length;
 
-  // While there remain elements to shuffle...
-  while (currentIndex != 0) {
+//   // While there remain elements to shuffle...
+//   while (currentIndex != 0) {
 
-    // Pick a remaining element...
-    let randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
+//     // Pick a remaining element...
+//     let randomIndex = Math.floor(Math.random() * currentIndex);
+//     currentIndex--;
 
-    // And swap it with the current element.
-    [newArr[currentIndex], array[randomIndex]] = [
-      newArr[randomIndex], array[currentIndex]];
-  }
+//     // And swap it with the current element.
+//     [newArr[currentIndex], arr[randomIndex]] = [
+//       newArr[randomIndex], arr[currentIndex]];
+//   }
   
-  return newArr;
-}
+//   return newArr;
+// }
 
 function App() {
 
