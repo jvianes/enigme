@@ -1,7 +1,4 @@
 
-interface IPhraseDialogProps {
-  text: string,
-}
-export function PhraseDialog(props: IPhraseDialogProps) {
-  return <div>{props.text}</div>
+export function PhraseDialog(props: React.PropsWithChildren) {
+  return <div>{props.children}</div>
 }

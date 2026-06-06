@@ -4,26 +4,70 @@ import { AccessorySelectable } from './components/AccessorySelectable'
 import { PhraseDialog } from './components/PhraseDialog';
 
 
+function shuffle(arr: T[]) {
+  const newArr = [...arr];
+  // Source - https://stackoverflow.com/a/2450976
+// Posted by ChristopheD, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-06-06, License - CC BY-SA 4.0
 
+  let currentIndex = newArr.length;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [newArr[currentIndex], array[randomIndex]] = [
+      newArr[randomIndex], array[currentIndex]];
+  }
+  
+  return newArr;
+}
 
 function App() {
 
   const [selectedAccessories, setSelectedAccessories] = useState<Set<string>>(new Set<string>());
 
-
-  const accessories = [
-    {id:"casquette", texte: "Casquette" },
-    {id:"chapeau", texte: "Chapeau" }
+  const allAccessories = [
+        {id:"casquette", texte:"🧢 Casquette"},
+        {id:"chapeau", texte:"🎩 Chapeau"},
+        {id:"manteau", texte:"🧥 Manteau"},
+        {id:"lunettes", texte:"👓 Lunettes de vue"},
+        {id:"poudre", texte:"☝️ Poudre à empreintes"},
+        {id:"carnet", texte:"🗒️ Carnet"},
+        {id:"chaussures", texte:"👞 Chaussures"},
+        {id:"robe", texte:"👗 Robe"},
+        {id:"stylo", texte:"🖊️ Stylo"},
+        {id:"fleurs", texte:"🌹 Fleurs"},
+        {id:"sac_a_main", texte:"👜 Sac à main"},
+        {id:"lunettes_soleil", texte:"🕶️ Lunettes de soleil"},
+        {id:"soleil", texte:"☀️ Soleil"},
+        {id:"bonbons", texte:"🍬 Bonbons"},
+        {id:"verre_de_vin", texte:"🍷 Verre de vin"},
+        {id:"loupe", texte:"🔍 Loupe"},
+        {id:"velo", texte:"🚲 Vélo"},
+        {id:"trompette", texte:"🎺 Trompette"},
   ];
+  
+  const accessories = allAccessories;//shuffle(allAccessories);
 
   const winningAccessories = new Set([
-    "chapeau"
+    "chapeau",
+    "lunettes_soleil",
+    "loupe",
+    "stylo",
+    "carnet",
+    "manteau",
+    "poudre",
+    "chaussures",
   ]);
 
   const phrase = "Demandez à la plus petite. Elle a trouvé et caché un indice appartenant au coupable.";
 
   const onChange = useCallback((id: string, selected: boolean) => {
-    console.log(id, selected);
     const newSelection = new Set(selectedAccessories);
     if (selected) {
       newSelection.add(id);
@@ -34,10 +78,8 @@ function App() {
   }, [selectedAccessories]);
 
   const win = useMemo(() => {
-    console.log("compute win state");
     const sizeOk = selectedAccessories.size === winningAccessories.size;
     const difference = selectedAccessories.symmetricDifference(winningAccessories);
-    console.log('winning state', 'sameSize=', sizeOk, 'difference=', difference, 'selected=', selectedAccessories);
     return sizeOk && difference.size === 0;
   }, [selectedAccessories]);
 
@@ -46,27 +88,8 @@ function App() {
       <section id="left">
         <h2>Accessoires</h2>
         { accessories.map((a) => AccessorySelectable({ accessoire: a, onChange: onChange })) }
-        <label><input type="checkbox" name="ustensiles" value="casquette"/> 🧢 Casquette</label>
-        <label><input type="checkbox" name="ustensiles" value="chapeau"/> 🎩 Chapeau</label>
-        <label><input type="checkbox" name="ustensiles" value="lunettes_soleil"/> 🕶️ Lunettes de soleil</label>
-        <label><input type="checkbox" name="ustensiles" value="lunettes"/> 👓 Lunettes de vue</label>
-        <label><input type="checkbox" name="ustensiles" value="loupe"/> 🔍 Loupe</label>
-        <label><input type="checkbox" name="ustensiles" value="poudre"/> ☝️ Poudre à empreintes</label>
-        <label><input type="checkbox" name="ustensiles" value="stylo"/> 🖊️ Stylo</label>
-        <label><input type="checkbox" name="ustensiles" value="carnet"/> 🗒️ Carnet</label>
-        pipe
-        manteau
-        chaussures
-        robe
-        fleurs
-        sac à main
-        soleil
-        bonbons
-        verre de vin
-        vélo
-        trompette
       </section>
-      {win && <PhraseDialog text={phrase}/>}
+      {win && <PhraseDialog>{phrase}</PhraseDialog>}
     </div>
   )
 }
